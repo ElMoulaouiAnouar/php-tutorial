@@ -1,0 +1,119 @@
+table employe(id_employe,nom,prenom,dateNaissance,gander,tel,email,password,id_type_user)
+table demande_conge(id_demande,date_demande,date_debut,date_fin,id_employe,etat)
+table type_user(id_type_user,libele)
+
+
+create database gestion_conge_php;
+create table type_users(
+id_type_user int primary key auto_increment,
+libelle varchar(20)
+);
+
+create table employes(
+id_employe int primary key auto_increment,
+nom varchar(20),
+prenom varchar(20),
+dateNaissance date,
+gander bit,
+tel varchar(15),
+email varchar(50) unique,
+password varchar(30),
+id_type_user int,
+constraint fk_id_type_user foreign key(id_type_user) references type_users(id_type_user)
+);
+create table demande_conge(
+id_demande int primary key auto_increment,
+date_demande date,
+date_debut date,
+date_fin date,
+id_employe int,
+etat varchar(20),
+constraint fk_id_employe foreign key(id_employe) references employes(id_employe)
+);
+
+
+-------------------------
+user(admin)
+
+accuiel/listEmploye/listDemande/addEmploye/notification/
+
+user(simple)
+accuiel/demandeConge/MesDommande/
+
+
+
+
+
+//////////////////////////////////////////////////////
+blogger
+
+
+tables//
+/////// 
+post(id_post,title,description,date_update_post,photo_post[forein key])
+post_categoreis(id_categoreis,id_post)
+comment(id_comment,id_users,id_post,comment_description,status,date_update_comment)
+users(id_users,name,email,password,type_user)
+categories(id_categories,libelle)
+photo(id_photo,url_photo)
+
+create database my_blog_with_php;
+
+use my_blog_with_php;
+
+create table photos(
+id_photo int primary key auto_increment,
+url_photo text
+);
+
+create table categories(
+id_categorie int primary key auto_increment,
+libelle varchar(200)
+);
+create table users(
+id_user int primary key auto_increment,
+name varchar(50),
+email varchar(50),
+pass varchar(40),
+id_photo int,
+type_user varchar(20),
+constraint fk_id_post foriegn key(id_photo) references photos(id_photo)
+);
+
+create table posts(
+id_post int primary key auto_increment,
+title varchar(1000),
+description text,
+date_update_post date,
+id_photo int,
+constraint fk_id_photo foreign key(id_photo) references photos(id_photo)
+);
+
+create table posts_categories(
+id_post int primary key,
+id_categorie int primary key,
+constraint fk_id_post foriegn key(id_post) references posts(id_post),
+constraint fk_id_categorie foreign key(categorie) references categories(id_categorie)
+);
+
+create table comments(
+id_comment int primary key auto_increment,
+id_user int,
+id_post int,
+comment_description text,
+status_comment varchar(10),
+date_update_comment date,
+constraint fk_id_user foreign key(id_user) references users(id_user),
+constraint fk_id_post foreign key(id_post) references posts(id_post) 
+);
+
+
+
+
+
+
+---------------------------------------------------------------------
+
+-- tverfier ila kan user mkonicter tal3 lih edit o delete ghir f commentaire dialo sf
+-- tverfier ila bgha isupprimer lik chi commentaire men url
+--  kola user ital3 lih les commentaire dyawlo sf o homa li 3ndo lha9 i3dl fihm o ysupprimer 

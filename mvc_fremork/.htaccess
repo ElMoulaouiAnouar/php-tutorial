@@ -1,0 +1,4 @@
+Options -Indexes
+RewriteEngine On
+RewriteBase /php_tutorial/mvc_fremork/
+RewriteRule ^(.*)$ public/$1
